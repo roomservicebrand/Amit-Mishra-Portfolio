@@ -75,6 +75,18 @@ const PublicationModal: React.FC<PublicationModalProps> = ({ isOpen, onClose, pu
                 <main className="flex-grow overflow-y-auto">
                     <article className="p-6" dangerouslySetInnerHTML={{ __html: content }} />
                 </main>
+                <footer className="p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 text-center">
+                    {publication?.link && publication.link !== '#' && (
+                        <a 
+                            href={publication.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors inline-flex items-center"
+                        >
+                            View Original Article <i className="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                    )}
+                </footer>
             </div>
         </div>
     );
