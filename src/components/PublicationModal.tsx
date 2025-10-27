@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
