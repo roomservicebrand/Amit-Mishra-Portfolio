@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, lazy, Suspense } from 'react';
 
 const PublicationModal = lazy(() => import('./PublicationModal'));
@@ -73,7 +72,7 @@ const publications: Publication[] = [
     thumbnail: "https://i.postimg.cc/HLCjp29K/IMG-3701.jpg",
     publicationName: "HeartWater",
     description: "A feature sharing insights on recovery and personal growth within the healthcare community.",
-    link: "https://www.heartwater.com/blogs/news/pour-your-heart-out-amit",
+    link: "https://www.instagram.com/p/B12d-c2gPZy/",
   }
 ];
 
