@@ -1,14 +1,22 @@
 
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable is not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const getAI = () => {
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.warn("API_KEY environment variable is not set. Gemini features will be disabled.");
+    return null;
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 export const generateInsights = async (): Promise<string> => {
   try {
+    const ai = getAI();
+    if (!ai) {
+      throw new Error("API key not configured");
+    }
+
     const prompt = `
       Provide a concise summary of three major emerging trends in the US behavioral healthcare industry for the coming year, 
       focusing on business development and revenue optimization. 
@@ -33,6 +41,11 @@ export const generateInsights = async (): Promise<string> => {
 
 export const draftEmail = async (yourName: string, companyName: string, outreachPurpose: string): Promise<string> => {
   try {
+    const ai = getAI();
+    if (!ai) {
+      throw new Error("API key not configured");
+    }
+
     const fromClause = companyName ? `from ${yourName} at ${companyName}` : `from ${yourName}`;
     const prompt = `
       Draft a professional and concise outreach email to Amit Mishra ${fromClause}.
@@ -85,6 +98,11 @@ let chat: Chat; // Maintain chat session
 
 export const chatWithAmitAI = async (message: string): Promise<string> => {
   try {
+    const ai = getAI();
+    if (!ai) {
+      throw new Error("API key not configured");
+    }
+
     if (!chat) {
       chat = ai.chats.create({
         model: 'gemini-2.5-flash',
