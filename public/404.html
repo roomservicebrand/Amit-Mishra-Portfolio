@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      (function (l) {
+        if (!l.search) return;
+        var q = {};
+        l.search
+          .slice(1)
+          .split('&')
+          .forEach(function (v) {
+            var a = v.split('=');
+            q[decodeURIComponent(a[0])] = decodeURIComponent(a.slice(1).join('='));
+          });
+        if (q.p) {
+          l.replace(
+            l.origin +
+              q.p +
+              (q.q ? '?' + q.q : '') +
+              (q.f ? '#' + q.f : '')
+          );
+        }
+      })(window.location);
+    </script>
+  </head>
+  <body>Redirecting…</body>
+</html>
