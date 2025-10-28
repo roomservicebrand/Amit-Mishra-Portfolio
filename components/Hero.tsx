@@ -14,11 +14,12 @@ const Hero: React.FC = () => {
                                 <i className="fas fa-paper-plane mr-2"></i>Let's Connect
                             </a>
                             <a 
-                              href="/amit-mishra-resume.pdf"
-                              download="Amit_Mishra_Resume.pdf"
+                              href="https://www.linkedin.com/in/amitmishraclear"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover:bg-blue-600 hover:text-white dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500 dark:hover:text-white hover:scale-105"
                             >
-                              <i className="fas fa-download mr-2"></i>Download Resume
+                              <i className="fab fa-linkedin mr-2"></i>View LinkedIn Profile
                             </a>
                         </div>
                     </div>

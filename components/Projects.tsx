@@ -281,7 +281,7 @@ const Projects: React.FC = () => {
                                 <div className="aspect-video">
                                     <iframe 
                                         className="w-full h-full"
-                                        src="https://www.youtube.com/embed/wswkrEFEVV8?si=yOy658H3y-ocsvxN" 
+                                        src="https://www.youtube.com/embed/wswkrEFEVV8" 
                                         title="YouTube video player for Keystone Ledger Professional" 
                                         frameBorder="0" 
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
