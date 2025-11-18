@@ -2,13 +2,13 @@
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
 const API_KEY_MISSING_MESSAGE =
-  "Gemini API key is not configured. Please set VITE_GEMINI_API_KEY to enable AI features.";
+  "Gemini API key is not configured. Please set VITE_GEMINI_API_KEY (or GEMINI_API_KEY) to enable AI features.";
 
 let aiClient: GoogleGenAI | null = null;
 let chat: Chat | null = null;
 
 const getAiClient = () => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.GEMINI_API_KEY;
 
   if (!apiKey) {
     console.warn(API_KEY_MISSING_MESSAGE);
