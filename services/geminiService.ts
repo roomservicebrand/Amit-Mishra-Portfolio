@@ -1,10 +1,25 @@
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable is not set");
-}
+const API_KEY_MISSING_MESSAGE =
+  "Gemini API key is not configured. Please set VITE_GEMINI_API_KEY to enable AI features.";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let aiClient: GoogleGenAI | null = null;
+let chat: Chat | null = null;
+
+const getAiClient = () => {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+  if (!apiKey) {
+    console.warn(API_KEY_MISSING_MESSAGE);
+    throw new Error(API_KEY_MISSING_MESSAGE);
+  }
+
+  if (!aiClient) {
+    aiClient = new GoogleGenAI({ apiKey });
+  }
+
+  return aiClient;
+};
 
 export const generateInsights = async (): Promise<string> => {
   try {
@@ -15,6 +30,7 @@ export const generateInsights = async (): Promise<string> => {
       Do not include any other HTML tags like <ul>, <li>, <b>, or <br>. Ensure the output is clean HTML.
     `;
 
+    const ai = getAiClient();
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
@@ -46,6 +62,7 @@ export const draftEmail = async (yourName: string, companyName: string, outreach
       ...
     `;
 
+    const ai = getAiClient();
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
@@ -80,10 +97,10 @@ Amit is a forward-thinking, results-driven healthcare executive with over 8 year
 Your role is to act as a first point of contact, providing information about Amit's skills, experience, and achievements. You can answer questions like "What is Amit's experience with Utilization Review?" or "Can you detail his major achievements?". Be conversational and friendly.
 `;
 
-let chat: Chat; // Maintain chat session
-
 export const chatWithAmitAI = async (message: string): Promise<string> => {
   try {
+    const ai = getAiClient();
+
     if (!chat) {
       chat = ai.chats.create({
         model: 'gemini-2.5-flash',
