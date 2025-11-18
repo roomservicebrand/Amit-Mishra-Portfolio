@@ -9,6 +9,7 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0',
   },
+  envPrefix: ['VITE_', 'GEMINI_'],
   plugins: [react()],
   base: `/${repoName}/`,
   build: {
